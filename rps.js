@@ -41,7 +41,6 @@ let playRound = function(humanSelection, computerSelection){
 }
 
 
-
 function playGame(){
     let humanScore = 0;
     let computerScore = 0;
@@ -52,7 +51,7 @@ function playGame(){
         let computerChoice = getComputerChoice();
         let result = playRound(humanChoice, computerChoice);
 
-        console.log(`Round: ${i + 1}`);
+        console.log(`%cRound: ${i + 1}`, "color: purple; font-weight: bold; font-size: 12px;");
         console.log(`computer chose: ${computerChoice}`);
         console.log(`You chose: ${humanChoice}`);
         console.log(`Result: ${result}`);
