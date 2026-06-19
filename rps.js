@@ -1,23 +1,13 @@
 function getComputerChoice(){
     const randomNumber = Math.floor(Math.random()* 3);
-
     if (randomNumber === 0){
         return "rock";
-
     } else if (randomNumber === 1) {
         return "paper";
-
     } else {
         return "scissors";
     }
 }
-
-
-function getHumanChoice(){
-    const humanInput = prompt("Enter rock, paper, or scissors:");
-    return humanInput.toLowerCase(); 
-}
-
 
 let playRound = function(humanSelection, computerSelection){
     if ((humanSelection === "rock" && computerSelection === "scissors") ||
@@ -25,59 +15,83 @@ let playRound = function(humanSelection, computerSelection){
        (humanSelection === "paper" && computerSelection === "rock")
     ){
         return "You win!";
-
     } else if (
         (computerSelection === "rock" && humanSelection === "scissors") ||
         (computerSelection === "scissors" && humanSelection === "paper" ) ||
         (computerSelection === "paper" && humanSelection === "rock")
     ){
-        
         return "You lose!";
-
     } else {
-
-        return "It's a tie!"
+        return "It's a tie!";
     }
-}
+};
 
+// GLOBAL STATE: These variables live outside functions so they persist across clicks
+let humanScore = 0;
+let computerScore = 0;
+let round = 0;
 
-function playGame(){
-    let humanScore = 0;
-    let computerScore = 0;
-     
-    for (let i = 0; i < 5; i++){
+// This function handles a single turn every time a button is clicked
+function handleRound(humanChoice) {
+    // 1. Don't play if the game is already over
+    if (round >= 5) return; 
 
-        let humanChoice = getHumanChoice();
-        let computerChoice = getComputerChoice();
-        let result = playRound(humanChoice, computerChoice);
+    // 2. Play the round
+    let computerChoice = getComputerChoice();
+    let result = playRound(humanChoice, computerChoice);
+    round++;
 
-        console.log(`%cRound: ${i + 1}`, "color: purple; font-weight: bold; font-size: 12px;");
-        console.log(`computer chose: ${computerChoice}`);
-        console.log(`You chose: ${humanChoice}`);
-        console.log(`Result: ${result}`);
+    // 3. Update the global scores
+    if (result === "You win!") {
+        humanScore++;
+    } else if (result === "You lose!") {
+        computerScore++;
+    }
 
-        // Update scores
-        if (result === "You win!"){
-            humanScore++;
-        } else if (result === "You lose!"){
-            computerScore++;
+    // 4. Target the HTML div and display the current round results
+    const div = document.querySelector("div");
+    let message = `\n Round ${round}: You chose: ${humanChoice} | Computer chose: ${computerChoice}.\n`;
+    message += `Standing : ${result} \n`
+    message += `Score: Human ${humanScore} - Computer ${computerScore}`;
+
+    // 5. Check if the match is officially over
+    if (round === 5) {
+        message += "\n\nMatch Over: ";
+        if (humanScore > computerScore) {
+            message += "You win the whole game! 🎉";
+        } else if (computerScore > humanScore) {
+            message += "Computer wins the whole game! 🤖";
+        } else {
+            message += "It's an overall tie!";
         }
-        
-        console.log(`Current Score = Human: ${humanScore} | Computer: ${computerScore}`);
-
     }
 
-    // Final winner announcement
-    if (humanScore > computerScore) {
-        console.log("Match Over: You win the whole game! 🎉");
-    } else if (computerScore > humanScore) {
-        console.log("Match Over: Computer wins the whole game! 🤖");
-    } else {
-        console.log("Match Over: It's an overall tie!");
-    }
+    div.textContent = message;
+};
 
-}
+// BUTTON EVENT LISTENERS
+const btnRock = document.querySelector(".btn1");
+btnRock.addEventListener("click", () => {
+    handleRound("rock");
+});
 
-// Start the game!
+const btnPaper = document.querySelector(".btn2");
+btnPaper.addEventListener("click", () => {
+    handleRound("paper");
+});
 
-playGame();
+const btnScissor = document.querySelector(".btn3");
+btnScissor.addEventListener("click", () => {
+    handleRound("scissors");
+});
+
+const btn = document.querySelector(".re-set");
+btn.addEventListener("click", () => {
+    humanScore = 0;
+    computerScore = 0 ;
+    round = 0
+
+    const div = document.querySelector("div");
+    div.textContent = "Game over! Start again."
+    
+});
