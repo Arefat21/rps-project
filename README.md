@@ -1,18 +1,22 @@
-# Rock Paper Scissors (Console Version)
+# Rock Paper Scissors (UI Edition)
 
-This is a foundational JavaScript project built as part of **The Odin Project** curriculum. 
-It is a fully functional, 5-round Rock Paper Scissors game played directly inside the browser's developer tools console.
+A fully interactive, browser-based Rock Paper Scissors game built as part of The Odin Project curriculum. This project marks the transition from a terminal/console-based game into an event-driven web application.
 
-## Features
-- **Dynamic Computer AI**: Uses customized math logic with `Math.random()` to generate randomized moves.
-- **Interactive User Input**: Captures user moves via browser prompt dialogs and normalizes text casing dynamically.
-- **Score Tracking**: Tracks a 5-round game, displaying immediate round results and current standings using template literals.
-- **Complete Game Loop**: Automatically calculates and declares an overall winner at the end of the match.
+## 🚀 Live Demo
+[View Live Project Here](https://arefat21.github.io/rps-project/)
 
+## ✨ Features
+- Fully responsive web user interface (no more browser prompts!).
+- Dynamic score tracking that updates after every round.
+- Automatic match termination and winner announcement after 5 rounds.
+- Quick restart button to clear scores and start a fresh game.
 
-## What I Learned
-- Function declaration and execution order
-- Variable scoping (Local vs. Global)
-- Control flow and conditional operators (`if`, `else if`, `else`)
-- `for` loop mechanics and iteration lifecycles
-- String interpolation / Template Literals
+## 🛠️ Skills Learned & Practiced
+- **DOM Manipulation:** Selecting HTML elements and dynamically modifying text layout using `textContent` and `white-space` styling.
+- **Event-Driven JavaScript:** Managing application state outside of procedural `for` loops by listening for asynchronous mouse clicks.
+- **Variable Scope:** Working with global and local blocks to ensure game data persists safely across multiple user interactions.
+- **Git Workflow:** Developing features on isolated feature branches and cleanly merging them into `main`.
+
+## 📦 How to Run Locally
+1. Clone the repository: `git clone <https://github.com/Arefat21/rps-project>`
+2. Open `index.html` in your favorite web browser.
